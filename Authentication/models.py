@@ -1,8 +1,6 @@
 from django.db import models
-
-# Create your models here.
 from django.contrib.auth.models import AbstractUser
-from django.db import models
+from django.conf import settings
 
 class CustomUser(AbstractUser):
     USER_TYPE_CHOICES = (
@@ -11,9 +9,7 @@ class CustomUser(AbstractUser):
         ('seller', 'Seller'),
     )
     
-    # New field for age
     age = models.PositiveIntegerField(null=True, blank=True)
-    
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
 
     def __str__(self):

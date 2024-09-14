@@ -28,7 +28,8 @@ SECRET_KEY = "django-insecure-z!m(*w8gb0p5ror2b8)qx*goi%q=_839%v9f1@lpp42c(z7bfu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
 
 
 # Application definition
@@ -43,6 +44,8 @@ INSTALLED_APPS = [
     'Authentication',  # arj
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
+    'django_filters',
+    'menu',
 ]
 
 MIDDLEWARE = [
@@ -114,15 +117,22 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ],
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=20),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
 }
 AUTH_USER_MODEL = 'Authentication.CustomUser'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 #/arj
 # Internationalization
